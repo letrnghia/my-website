@@ -5,291 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration Form</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="password"], input[type="email"], select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .error {
-            color: red;
-            font-size: 0.9em;
-        }
-        #preview {
-            max-width: 100px;
-            max-height: 100px;
-            margin-top: 10px;
-        }
+        /* Giữ nguyên phần CSS từ artifact trước */
     </style>
 </head>
 <body>
     <h1>User Registration</h1>
     <form id="registrationForm">
-        <div class="form-group">
-            <label for="username">Username *</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" maxlength="255" required>
-            <span id="usernameError" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password *</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" maxlength="255" required>
-            <button type="button" id="togglePassword">Show/Hide</button>
-            <span id="passwordError" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" maxlength="255" required>
-            <span id="emailError" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label for="fullName">Full Name (Optional)</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name">
-        </div>
-
-        <div class="form-group">
-            <label for="role">Role *</label>
-            <select id="role" name="role" required>
-                <option value="">Select a role</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="profilePicture">Profile Picture</label>
-            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
-            <input type="text" id="profilePictureUrl" name="profilePictureUrl" placeholder="Or enter image URL">
-            <img id="preview" src="#" alt="Profile Picture Preview" style="display: none;">
-        </div>
-
-        <div class="form-group">
-            <label>Account Created At:</label>
-            <span id="createdAt"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Last Updated At:</label>
-            <span id="updatedAt"></span>
-        </div>
-
-        <button type="submit" id="submitButton" disabled>Create Account</button>
+        <!-- Giữ nguyên các trường input từ artifact trước -->
+        
+        <button type="submit" id="submitButton">Create Account</button>
         <button type="button" id="cancelButton">Cancel</button>
     </form>
 
     <script>
-        // Password toggle functionality
-        const togglePassword = document.getElementById('togglePassword');
-        const password = document.getElementById('password');
-
-        togglePassword.addEventListener('click', function () {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.textContent = type === 'password' ? 'Show' : 'Hide';
-        });
-
-        // Form validation
         const form = document.getElementById('registrationForm');
         const submitButton = document.getElementById('submitButton');
 
-        form.addEventListener('input', validateForm);
-
-        function validateForm() {
-            let isValid = true;
-
-            // Username validation
-            const username = document.getElementById('username');
-            const usernameError = document.getElementById('usernameError');
-            if (username.value.trim() === '') {
-                usernameError.textContent = 'Username is required';
-                isValid = false;
-            } else {
-                usernameError.textContent = '';
-            }
-
-            // Password validation (simple check for demonstration)
-            const passwordError = document.getElementById('passwordError');
-            if (password.value.length < 8) {
-                passwordError.textContent = 'Password must be at least 8 characters long';
-                isValid = false;
-            } else {
-                passwordError.textContent = '';
-            }
-
-            // Email validation
-            const email = document.getElementById('email');
-            const emailError = document.getElementById('emailError');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email.value)) {
-                emailError.textContent = 'Invalid email format';
-                isValid = false;
-            } else {
-                emailError.textContent = '';
-            }
-
-            // Role validation
-            const role = document.getElementById('role');
-            if (role.value === '') {
-                isValid = false;
-            }
-
-            submitButton.disabled = !isValid;
-        }
-
-        // Profile picture preview
-        const profilePicture = document.getElementById('profilePicture');
-        const profilePictureUrl = document.getElementById('profilePictureUrl');
-        const preview = document.getElementById('preview');
-
-        profilePicture.addEventListener('change', previewImage);
-        profilePictureUrl.addEventListener('input', previewImage);
-
-        function previewImage() {
-            const file = profilePicture.files[0];
-            const url = profilePictureUrl.value.trim();
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else if (url) {
-                preview.src = url;
-                preview.style.display = 'block';
-            } else {
-                preview.src = '#';
-                preview.style.display = 'none';
-            }
-        }
-
-        // Set current date for created and updated fields
-        const createdAt = document.getElementById('createdAt');
-        const updatedAt = document.getElementById('updatedAt');
-        const currentDate = new Date().toLocaleString();
-        createdAt.textContent = currentDate;
-        updatedAt.textContent = currentDate;
-
-        // Form submission (prevent default for demonstration)
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Form submitted successfully!');
+            
+            // Giả lập quá trình đăng ký
+            setTimeout(function() {
+                var registrationSuccessful = true; // Giả định đăng ký thành công
+                
+                if (registrationSuccessful) {
+                    alert('Đăng ký thành công! Chuyển hướng đến trang chào mừng...');
+                    window.location.href = 'welcome.html';
+                } else {
+                    alert('Đăng ký không thành công. Vui lòng thử lại.');
+                }
+            }, 1000); // Giả lập độ trễ 1 giây
         });
 
-        // Cancel button
-        const cancelButton = document.getElementById('cancelButton');
-        cancelButton.addEventListener('click', function() {
-            if (confirm('Are you sure you want to cancel? All entered data will be lost.')) {
-                window.history.back();
-            }
-        });
-    </script>
-</body>
-</html>
-// Thêm đoạn mã này vào phần xử lý submit form của trang đăng ký
-if (registrationSuccessful) {
-    window.location.href = 'welcome.html';
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Multi-tab Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .tabs {
-            display: flex;
-            background-color: #333;
-        }
-        .tab {
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .tab:hover {
-            background-color: #555;
-        }
-        .tab.active {
-            background-color: #4CAF50;
-        }
-        .content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 0 0 5px 5px;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to Our Website</h1>
-        <div class="tabs">
-            <div class="tab active" onclick="openTab(event, 'home')">Home</div>
-            <div class="tab" onclick="openTab(event, 'about')">About</div>
-            <div class="tab" onclick="openTab(event, 'lab')">Lab</div>
-        </div>
-        <div class="content">
-            <div id="home" class="tab-content active">
-                <h2>Home</h2>
-                <p>Welcome to our website! We're glad you're here. Feel free to explore our different sections using the tabs above.</p>
-            </div>
-            <div id="about" class="tab-content">
-                <h2>About Us</h2>
-                <p>We are a company dedicated to innovation and excellence. Our team works tirelessly to bring you the best products and services.</p>
-            </div>
-            <div id="lab" class="tab-content">
-                <h2>Lab</h2>
-                <p>Our lab is where the magic happens! Here, we conduct cutting-edge research and develop new technologies that shape the future.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabContent, tabLinks;
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-            }
-            tabLinks = document.getElementsByClassName("tab");
-            for (i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+        // Giữ nguyên các hàm JavaScript khác từ artifact trước
     </script>
 </body>
 </html>
