@@ -1,88 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Multi-tab Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .tabs {
-            display: flex;
-            background-color: #333;
-        }
-        .tab {
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .tab:hover {
-            background-color: #555;
-        }
-        .tab.active {
-            background-color: #4CAF50;
-        }
-        .content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 0 0 5px 5px;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+    <title>Đăng Ký Thành Công</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Our Website</h1>
-        <div class="tabs">
-            <div class="tab active" onclick="openTab(event, 'home')">Home</div>
-            <div class="tab" onclick="openTab(event, 'about')">About</div>
-            <div class="tab" onclick="openTab(event, 'lab')">Lab</div>
-        </div>
-        <div class="content">
-            <div id="home" class="tab-content active">
-                <h2>Home</h2>
-                <p>Welcome to our website! We're glad you're here. Feel free to explore our different sections using the tabs above.</p>
-            </div>
-            <div id="about" class="tab-content">
-                <h2>About Us</h2>
-                <p>We are a company dedicated to innovation and excellence. Our team works tirelessly to bring you the best products and services.</p>
-            </div>
-            <div id="lab" class="tab-content">
-                <h2>Lab</h2>
-                <p>Our lab is where the magic happens! Here, we conduct cutting-edge research and develop new technologies that shape the future.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabContent, tabLinks;
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].style.display = "none";
-            }
-            tabLinks = document.getElementsByClassName("tab");
-            for (i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>
+    <h2>Chúc Mừng!</h2>
+    <p>Bạn đã đăng ký tài khoản thành công.</p>
+    <a href="index.html">Quay lại trang chủ</a>
 </body>
 </html>
