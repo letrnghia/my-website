@@ -3,146 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabbed Web Page</title>
+    <title>Welcome - Multi-tab Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
         }
         .tabs {
             display: flex;
-            cursor: pointer;
-            margin-bottom: 20px;
+            background-color: #333;
         }
         .tab {
-            background: #ccc;
             padding: 10px 20px;
-            margin-right: 5px;
-            border-radius: 5px;
-            transition: background 0.3s;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
         .tab:hover {
-            background: #bbb;
+            background-color: #555;
         }
-        .active {
-            background: #28a745;
-            color: white;
+        .tab.active {
+            background-color: #4CAF50;
         }
         .content {
-            background: white;
+            background-color: white;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 5px 5px;
         }
-        .hidden {
+        .tab-content {
             display: none;
         }
-        .buttons {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .button {
-            background: #ccc;
-            padding: 10px 15px;
-            margin-right: 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button:hover {
-            background: #bbb;
-        }
-        .button.active {
-            background: #28a745;
-            color: white;
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
-
-<div class="tabs">
-    <div class="tab active" onclick="showTab('home')">Home</div>
-    <div class="tab" onclick="showTab('about')">About</div>
-    <div class="tab" onclick="showTab('lab')">Lab</div>
-</div>
-
-<div class="content">
-    <div id="home" class="tab-content">
-        <h2>Welcome to Our Website</h2>
-        <p>This is the home page content.</p>
-    </div>
-    <div id="about" class="tab-content hidden">
-        <h2>About Us</h2>
-        <p>This page provides information about our organization.</p>
-    </div>
-    <div id="lab" class="tab-content hidden">
-        <h2>Laboratories</h2>
-        <div class="buttons">
-            <button class="button active" onclick="showLab('lab1')">Lab 1</button> <a href="lab1.html">lab 1</a>
-            <button class="button" onclick="showLab('lab2')">Lab 2</button>
-            <button class="button" onclick="showLab('lab3')">Lab 3</button>
+    <div class="container">
+        <h1>Welcome to Our Website</h1>
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 'home')">Home</div>
+            <div class="tab" onclick="openTab(event, 'about')">About</div>
+            <div class="tab" onclick="openTab(event, 'lab')">Lab</div>
         </div>
-        <div class="lab-content">
-            <div id="lab1" class="sub-tab-content">
-                <h3>Lab 1: Chemistry</h3>
-                <p>This lab specializes in research and development of new chemical compounds.</p>
+        <div class="content">
+            <div id="home" class="tab-content active">
+                <h2>Home</h2>
+                <p>Welcome to our website! We're glad you're here. Feel free to explore our different sections using the tabs above.</p>
             </div>
-            <div id="lab2" class="sub-tab-content hidden">
-                <h3>Lab 2: Physics</h3>
-                <p>We conduct physics experiments to explore the fundamental principles of nature.</p>
+            <div id="about" class="tab-content">
+                <h2>About Us</h2>
+                <p>We are a company dedicated to innovation and excellence. Our team works tirelessly to bring you the best products and services.</p>
             </div>
-            <div id="lab3" class="sub-tab-content hidden">
-                <h3>Lab 3: Biology</h3>
-                <p>This laboratory focuses on the study of living organisms and ecosystems.</p>
+            <div id="lab" class="tab-content">
+                <h2>Lab</h2>
+                <p>Our lab is where the magic happens! Here, we conduct cutting-edge research and develop new technologies that shape the future.</p>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function showTab(tabName) {
-        // Hide all tab contents
-        const contents = document.querySelectorAll('.tab-content');
-        contents.forEach(content => {
-            content.classList.add('hidden');
-        });
-
-        // Remove active class from all tabs
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.classList.remove('active');
-        });
-
-        // Show the selected tab and set it active
-        document.getElementById(tabName).classList.remove('hidden');
-        document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
-
-        // If 'lab' is selected, show Lab 1
-        if (tabName === 'lab') {
-            showLab('lab1');
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
         }
-    }
-
-    function showLab(labName) {
-        // Hide all lab contents
-        const labContents = document.querySelectorAll('.sub-tab-content');
-        labContents.forEach(content => {
-            content.classList.add('hidden');
-        });
-
-        // Remove active class from all buttons
-        const buttons = document.querySelectorAll('.button');
-        buttons.forEach(button => {
-            button.classList.remove('active');
-        });
-
-        // Show the selected lab and set the button active
-        document.getElementById(labName).classList.remove('hidden');
-        document.querySelector(`.button[onclick="showLab('${labName}')"]`).classList.add('active');
-    }
-</script>
-
+    </script>
 </body>
 </html>
