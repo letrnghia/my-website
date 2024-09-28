@@ -39,19 +39,22 @@
         .hidden {
             display: none;
         }
-        .sub-tabs {
-            display: flex;
-            cursor: pointer;
+        .buttons {
             margin-top: 20px;
             margin-bottom: 20px;
         }
-        .sub-tab {
+        .button {
             background: #ccc;
-            padding: 5px 15px;
+            padding: 10px 15px;
             margin-right: 5px;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
-        .sub-tab.active {
+        .button:hover {
+            background: #bbb;
+        }
+        .button.active {
             background: #28a745;
             color: white;
         }
@@ -76,22 +79,24 @@
     </div>
     <div id="lab" class="tab-content hidden">
         <h2>Laboratories</h2>
-        <div class="sub-tabs">
-            <div class="sub-tab active" onclick="showLab('lab1')"><a href="lab1.html>Lab 1</a> </div>
-            <div class="sub-tab" onclick="showLab('lab2')">Lab 2</div>
-            <div class="sub-tab" onclick="showLab('lab3')">Lab 3</div>
+        <div class="buttons">
+            <button class="button active" onclick="showLab('lab1')">Lab 1</button> <a href="lab1.html">lab 1</a>
+            <button class="button" onclick="showLab('lab2')">Lab 2</button>
+            <button class="button" onclick="showLab('lab3')">Lab 3</button>
         </div>
-        <div id="lab1" class="sub-tab-content">
-            <h3>Lab 1</h3>
-            <p>This lab specializes in research and development of new chemical compounds.</p>
-        </div>
-        <div id="lab2" class="sub-tab-content hidden">
-            <h3>Lab 2</h3>
-            <p>We conduct physics experiments to explore the fundamental principles of nature.</p>
-        </div>
-        <div id="lab3" class="sub-tab-content hidden">
-            <h3>Lab 3</h3>
-            <p>This laboratory focuses on the study of living organisms and ecosystems.</p>
+        <div class="lab-content">
+            <div id="lab1" class="sub-tab-content">
+                <h3>Lab 1: Chemistry</h3>
+                <p>This lab specializes in research and development of new chemical compounds.</p>
+            </div>
+            <div id="lab2" class="sub-tab-content hidden">
+                <h3>Lab 2: Physics</h3>
+                <p>We conduct physics experiments to explore the fundamental principles of nature.</p>
+            </div>
+            <div id="lab3" class="sub-tab-content hidden">
+                <h3>Lab 3: Biology</h3>
+                <p>This laboratory focuses on the study of living organisms and ecosystems.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -114,7 +119,7 @@
         document.getElementById(tabName).classList.remove('hidden');
         document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 
-        // If 'lab' is selected, show the first lab
+        // If 'lab' is selected, show Lab 1
         if (tabName === 'lab') {
             showLab('lab1');
         }
@@ -127,15 +132,15 @@
             content.classList.add('hidden');
         });
 
-        // Remove active class from all sub-tabs
-        const subTabs = document.querySelectorAll('.sub-tab');
-        subTabs.forEach(tab => {
-            tab.classList.remove('active');
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
         });
 
-        // Show the selected lab and set it active
+        // Show the selected lab and set the button active
         document.getElementById(labName).classList.remove('hidden');
-        document.querySelector(`.sub-tab[onclick="showLab('${labName}')"]`).classList.add('active');
+        document.querySelector(`.button[onclick="showLab('${labName}')"]`).classList.add('active');
     }
 </script>
 
